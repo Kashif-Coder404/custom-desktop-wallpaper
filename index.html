@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-16" />
+    <title>Lively Command Center V4</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=close"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.cdnfonts.com/css/digital-7-mono"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- <div class="bg"></div> -->
+    <video src="./bgVideo.webm" id="bgVideo" autoplay loop muted></video>
+    <!-- <div class="bg"></div> -->
+    <div id="cursor-glow">
+      <span class="material-symbols-outlined"></span>
+    </div>
+
+    <div class="main-grid">
+      <!-- <div class="col-left"></div> -->
+
+      <div class="col-center">
+        <div class="widget-clean clock-section">
+          <h1 id="time-display">00:00</h1>
+          <h3 id="date-display">LOADING DATE...</h3>
+          <!-- <div class="setting-row">
+            <label>System Font Size</label>
+            <input
+              type="range"
+              id="font-slider"
+              min="-1"
+              max="2"
+              step="0.1"
+              value="0"
+            />
+          </div> -->
+          <p id="greeting">System Online</p>
+        </div>
+
+        <div class="search-section">
+          <div class="search-tabs">
+            <button
+              class="threed-btn active"
+              onclick="setSearchEngine('google')"
+            >
+              <div class="top">
+                <span class="material-icons">search</span> Google
+              </div>
+              <div class="bottom"></div>
+            </button>
+
+            <button class="threed-btn" onclick="setSearchEngine('youtube')">
+              <div class="top">
+                <span class="material-icons">play_circle</span> YouTube
+              </div>
+              <div class="bottom"></div>
+            </button>
+
+            <button class="threed-btn" onclick="setSearchEngine('mdn')">
+              <div class="top">
+                <span class="material-icons">code</span> MDN
+              </div>
+              <div class="bottom"></div>
+            </button>
+
+            <button class="threed-btn" onclick="setSearchEngine('wikipedia')">
+              <div class="top">
+                <span class="material-icons">menu_book</span> Wiki
+              </div>
+              <div class="bottom"></div>
+            </button>
+
+            <button class="threed-btn" onclick="setSearchEngine('github')">
+              <div class="top">
+                <span class="material-icons">terminal</span> GitHub
+              </div>
+              <div class="bottom"></div>
+            </button>
+          </div>
+          <div class="search-container">
+            <span class="material-icons search-icon">search</span>
+            <input
+              type="text"
+              id="google-search"
+              placeholder="Search Google..."
+              onkeydown="handleSearch(event)"
+            />
+          </div>
+        </div>
+
+        <div class="widget-glass weather-panel">
+          <div class="weather-header">
+            <span class="material-icons">thermostat</span> METEOROLOGY
+          </div>
+          <div class="weather-body">
+            <div id="city" class="w-city">LOADING...</div>
+            <div class="w-row">
+              <div id="Temprature" class="w-temp">--°C</div>
+              <div class="w-details">
+                <div id="description">---</div>
+                <div id="windSpeed">VELOCITY: --</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-right">
+        <div class="widget-glass todo-card">
+          <div class="card-title">
+            <span class="material-icons">check_circle</span> MISSION PROTOCOL
+          </div>
+          <div class="todo-input-row">
+            <input type="text" id="todo-input" placeholder="New objective..." />
+            <button onclick="addTodo()">ADD</button>
+          </div>
+          <ul id="todo-list"></ul>
+        </div>
+
+        <div class="widget-glass theme-card">
+          <div class="card-title">
+            <span class="material-icons">palette</span> UI THEME
+          </div>
+          <div class="theme-grid">
+            <div
+              class="theme-btn t-cyber"
+              onclick="setTheme('cyber')"
+              title="Cyber Blue"
+            ></div>
+            <div
+              class="theme-btn t-matrix"
+              onclick="setTheme('matrix')"
+              title="Matrix Green"
+            ></div>
+            <div
+              class="theme-btn t-crimson"
+              onclick="setTheme('crimson')"
+              title="Red Alert"
+            ></div>
+            <div
+              class="theme-btn t-classic"
+              onclick="setTheme('classic')"
+              title="Classic B&W"
+            ></div>
+            <div
+              class="theme-btn t-sunset"
+              onclick="setTheme('sunset')"
+              title="Sunset Gradient"
+            ></div>
+            <div
+              class="theme-btn t-purple"
+              onclick="setTheme('purple')"
+              title="Purple Dream"
+            ></div>
+            <div
+              class="theme-btn t-ocean"
+              onclick="setTheme('ocean')"
+              title="Ocean Teal"
+            ></div>
+            <div
+              class="theme-btn t-gold"
+              onclick="setTheme('gold')"
+              title="Golden Hour"
+            ></div>
+          </div>
+        </div>
+
+        <div class="widget-glass launcher-card">
+          <div class="card-title">
+            <span class="material-icons">rocket_launch</span> QUICK LINKS
+          </div>
+
+          <div class="dropdown-section">
+            <button class="dropdown-btn" onclick="toggleDropdown('ai')">
+              <span class="material-icons">smart_toy</span> AI Tools
+              <span class="material-icons arrow">expand_more</span>
+            </button>
+            <div class="dropdown-content" id="dropdown-ai">
+              <a href="https://chatgpt.com" target="_blank">ChatGPT</a>
+              <a href="https://gemini.google.com" target="_blank">Gemini</a>
+              <a href="https://claude.ai" target="_blank">Claude</a>
+              <a href="https://perplexity.ai" target="_blank">Perplexity</a>
+              <a href="https://notebooklm.google.com" target="_blank"
+                >NotebookLM</a
+              >
+              <a href="https://poe.com" target="_blank">Poe</a>
+              <a href="https://you.com" target="_blank">You.com</a>
+            </div>
+          </div>
+
+          <div class="dropdown-section">
+            <button class="dropdown-btn" onclick="toggleDropdown('design')">
+              <span class="material-icons">palette</span> Design Apps
+              <span class="material-icons arrow">expand_more</span>
+            </button>
+            <div class="dropdown-content" id="dropdown-design">
+              <a href="https://figma.com" target="_blank">Figma</a>
+              <a href="https://dribbble.com" target="_blank">Dribbble</a>
+              <a href="https://behance.net" target="_blank">Behance</a>
+              <a href="https://mobbin.com" target="_blank">Mobbin</a>
+              <a href="https://awwwards.com" target="_blank">Awwwards</a>
+              <a href="https://pinterest.com" target="_blank">Pinterest</a>
+              <a href="https://canva.com" target="_blank">Canva</a>
+            </div>
+          </div>
+
+          <div class="dropdown-section">
+            <button class="dropdown-btn" onclick="toggleDropdown('normal')">
+              <span class="material-icons">apps</span> Normal Apps
+              <span class="material-icons arrow">expand_more</span>
+            </button>
+            <div class="dropdown-content" id="dropdown-normal">
+              <a href="https://google.com" target="_blank">Google</a>
+              <a href="https://youtube.com" target="_blank">YouTube</a>
+              <a href="https://gmail.com" target="_blank">Gmail</a>
+              <a href="https://drive.google.com" target="_blank">Drive</a>
+              <a href="https://calendar.google.com" target="_blank">Calendar</a>
+              <a href="https://maps.google.com" target="_blank">Maps</a>
+              <a href="https://netflix.com" target="_blank">Netflix</a>
+            </div>
+          </div>
+
+          <div class="dropdown-section">
+            <button class="dropdown-btn" onclick="toggleDropdown('coding')">
+              <span class="material-icons">code</span> Coding Apps
+              <span class="material-icons arrow">expand_more</span>
+            </button>
+            <div class="dropdown-content" id="dropdown-coding">
+              <a href="https://geeksforgeeks.org" target="_blank"
+                >GeeksforGeeks</a
+              >
+              <a href="https://w3schools.com" target="_blank">W3Schools</a>
+              <a href="https://github.com" target="_blank">GitHub</a>
+              <a href="https://leetcode.com" target="_blank">LeetCode</a>
+              <a href="https://replit.com" target="_blank">Replit</a>
+              <a href="https://developer.mozilla.org" target="_blank"
+                >MDN Docs</a
+              >
+              <a href="https://stackoverflow.com" target="_blank"
+                >Stack Overflow</a
+              >
+            </div>
+          </div>
+
+          <div class="dropdown-section">
+            <button class="dropdown-btn" onclick="toggleDropdown('social')">
+              <span class="material-icons">groups</span> Social Apps
+              <span class="material-icons arrow">expand_more</span>
+            </button>
+            <div class="dropdown-content" id="dropdown-social">
+              <a href="https://instagram.com" target="_blank">Instagram</a>
+              <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+              <a href="https://twitter.com" target="_blank">X (Twitter)</a>
+              <a href="https://facebook.com" target="_blank">Facebook</a>
+              <a href="https://reddit.com" target="_blank">Reddit</a>
+              <a href="https://discord.com" target="_blank">Discord</a>
+              <a href="https://telegram.org" target="_blank">Telegram</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget-glass tool-card">
+          <div class="card-title">
+            <span class="material-icons">timer</span> CHRONO
+          </div>
+          <div class="sw-row">
+            <div id="stopwatch-display">00:00:00</div>
+            <div class="mini-controls">
+              <button onclick="swStart()">
+                <span class="material-icons">play_arrow</span>
+              </button>
+              <button onclick="swStop()">
+                <span class="material-icons">pause</span>
+              </button>
+              <button onclick="swReset()">
+                <span class="material-icons">refresh</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
