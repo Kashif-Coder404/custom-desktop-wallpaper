@@ -66,8 +66,7 @@ const themes = {
     // Gold/Yellow Button
     btnColor: "#e6bd00",
     btnSecondary: "#b39200",
-    overlay:
-      `linear-gradient(135deg, rgba(30,20,0,${op1}) 0%, rgba(15,10,0,${op2}) 100%)`,
+    overlay: `linear-gradient(135deg, rgba(30,20,0,${op1}) 0%, rgba(15,10,0,${op2}) 100%)`,
   },
 };
 
@@ -329,7 +328,14 @@ document.addEventListener("mousemove", (e) => {
   glow.style.left = e.clientX + "px";
   glow.style.top = e.clientY + "px";
 });
-
+window.addEventListener("mousedown", () => {
+  glow.style.border = `5px dashed white`;
+  glow.style.scale = `0.5`;
+});
+window.addEventListener("mouseup", () => {
+  glow.style.border = ``;
+  glow.style.scale = ``;
+});
 /* --- DYNAMIC FONT SCALING --- */
 const fontSizeInp = document.getElementById("font-slider");
 
@@ -374,3 +380,48 @@ if (fontSizeInp) {
     fontSizeInp.dispatchEvent(new Event("input"));
   }
 }
+
+const videos = {
+  v1: {
+    url: "https://go.screenpal.com/player/stream/cOVjDgnrTgg",
+  },
+  v2: {
+    url: "https://go.screenpal.com/player/stream/cOVjD4nrTBz",
+  },
+  v3: {
+    url: "https://go.screenpal.com/player/stream/cOVjD5nrTk4",
+  },
+};
+
+const videoEl = document.getElementById("bgVideo");
+function changeBgVideo(vN) {
+  switch (vN) {
+    case "v1":
+      videoEl.setAttribute("src", videos.v1.url);
+      break;
+    case "v2":
+      videoEl.setAttribute("src", videos.v2.url);
+      break;
+    case "v3":
+      videoEl.setAttribute("src", videos.v3.url);
+      break;
+  }
+}
+const videoOptions = document.querySelectorAll(".videoOpt");
+videoOptions.forEach((videoOpt) => {
+  videoOpt.addEventListener("click", (e) => {
+    changeBgVideo(videoOpt.id);
+  });
+});
+
+const settingIcon = document.getElementById("settingIcon");
+const settingCont = document.querySelector(".settingsCont");
+const backIcon = document.querySelector(".backIcon");
+
+settingIcon.addEventListener("click", () => {
+  settingCont.style.transform = "scale(1)";
+});
+
+backIcon.addEventListener("click", () => {
+  settingCont.style.transform = "scale(0)";
+});

@@ -78,20 +78,18 @@ body {
   /* background: var(--accent); */
   border: 5px dashed var(--accent);
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+  translate: -50% -50%;
   pointer-events: none;
   z-index: 10000;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, scale 0.1s ease-in-out;
   animation: spinLoad 2s linear infinite;
-}
-#cursor-glow::after {
 }
 @keyframes spinLoad {
   from {
-    transform: translate(-50%, -50%) rotate(0deg);
+    transform: rotate(0deg);
   }
   to {
-    transform: translate(-50%, -50%) rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -669,68 +667,73 @@ button:hover {
   color: black;
 }
 
-/* --- FONT SIZE SLIDER STYLING --- */
-
-.setting-row {
+/* Settings Styling */
+.settingsIconCont {
   display: flex;
+  justify-content: end;
+  margin: 20px;
+  background: rgba(15, 20, 30, 0.65);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.3s, background 0.5s;
+}
+#settingIcon {
+  font-size: 30px;
+  color: var(--accent);
+  text-decoration: none;
+}
+#settingIcon:hover {
+  cursor: pointer;
+  transform: scale(1.15);
+  animation: spin 6s linear infinite;
+  color: white;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.videosCont {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between; /* Pushes label left, slider right */
-  gap: 20px;
-  background: rgba(0, 0, 0, 0.3); /* Darker background to separate it */
-  padding: 12px 15px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: 15px;
-  backdrop-filter: blur(5px);
+  gap: 14px;
 }
 
-.setting-row label {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--accent); /* Theme color for label */
-  letter-spacing: 1px;
-  white-space: nowrap;
+.videoOpt {
+  height: 90px;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
-/* 1. Reset Default Appearance */
-#font-slider {
-  -webkit-appearance: none; /* Chrome/Safari/Edge */
+.videoOpt img {
   width: 100%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.15); /* The empty track color */
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
-  transition: background 0.3s;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-/* 2. The "Thumb" (The handle you drag) - Webkit (Chrome/Edge) */
-#font-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 22px;
-  height: 22px;
-  background: var(--accent); /* Theme color handle */
-  border-radius: 50%;
-  border: 2px solid #fff; /* White border for contrast */
-  box-shadow: 0 0 15px var(--accent-glow); /* Glowing effect */
-  cursor: pointer;
-  margin-top: -8px; /* Centers it on the track */
-  transition: transform 0.2s, box-shadow 0.2s;
+.videoOpt:hover {
+  transform: scale(1.06);
+  border-color: var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow);
 }
 
-/* Hover Effect on Thumb */
-#font-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 25px var(--accent-glow);
-}
-
-/* 3. The "Thumb" - Firefox Support */
-#font-slider::-moz-range-thumb {
-  width: 22px;
-  height: 22px;
-  background: var(--accent);
-  border: 2px solid #fff;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 15px var(--accent-glow);
+.videoOpt.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 18px var(--accent-glow);
+  transform: scale(1.08);
 }
