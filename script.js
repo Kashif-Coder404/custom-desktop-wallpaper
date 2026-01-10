@@ -394,22 +394,31 @@ const videos = {
 };
 
 const videoEl = document.getElementById("bgVideo");
+const videoOptions = document.querySelectorAll(".videoOpt");
+
 function changeBgVideo(vN) {
   switch (vN) {
     case "v1":
       videoEl.setAttribute("src", videos.v1.url);
+      videoOptions[0].classList.add("active");
       break;
     case "v2":
       videoEl.setAttribute("src", videos.v2.url);
+      videoOptions[1].classList.add("active");
       break;
     case "v3":
       videoEl.setAttribute("src", videos.v3.url);
+      videoOptions[2].classList.add("active");
       break;
   }
 }
-const videoOptions = document.querySelectorAll(".videoOpt");
+
+videoOptions[0].classList.add("active");
 videoOptions.forEach((videoOpt) => {
-  videoOpt.addEventListener("click", (e) => {
+  videoOpt.addEventListener("click", () => {
+    videoOptions.forEach((v) => {
+      v.classList.remove("active");
+    });
     changeBgVideo(videoOpt.id);
   });
 });
