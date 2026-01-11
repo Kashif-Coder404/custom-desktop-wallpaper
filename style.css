@@ -114,7 +114,6 @@ body {
   filter: blur(0px) brightness(90%);
   z-index: -2;
   width: 100vw;
-  height: 100vh;
 }
 
 .main-grid {
