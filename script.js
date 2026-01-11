@@ -382,35 +382,24 @@ if (fontSizeInp) {
 }
 
 const videos = {
-  v1: {
-    url: "https://go.screenpal.com/player/stream/cOVjDgnrTgg",
-  },
-  v2: {
-    url: "https://go.screenpal.com/player/stream/cOVjD4nrTBz",
-  },
-  v3: {
-    url: "https://go.screenpal.com/player/stream/cOVjD5nrTk4",
-  },
+  v1: "https://go.screenpal.com/player/stream/cOVjDgnrTgg",
+
+  v2: "https://go.screenpal.com/player/stream/cOVjD4nrTBz",
+
+  v3: "https://go.screenpal.com/player/stream/cOVjD5nrTk4",
+
+  v4: "https://go.screenpal.com/player/stream/cOVX1RnrxVm",
+
+  v5: "https://go.screenpal.com/player/stream/cOVXirnrxnT",
 };
 
 const videoEl = document.getElementById("bgVideo");
 const videoOptions = document.querySelectorAll(".videoOpt");
 
 function changeBgVideo(vN) {
-  switch (vN) {
-    case "v1":
-      videoEl.setAttribute("src", videos.v1.url);
-      videoOptions[0].classList.add("active");
-      break;
-    case "v2":
-      videoEl.setAttribute("src", videos.v2.url);
-      videoOptions[1].classList.add("active");
-      break;
-    case "v3":
-      videoEl.setAttribute("src", videos.v3.url);
-      videoOptions[2].classList.add("active");
-      break;
-  }
+  const videoIndex = vN.split("")[1] - 1;
+  videoEl.src = videos[vN];
+  videoOptions[videoIndex].classList.add("active");
 }
 
 videoOptions[0].classList.add("active");
