@@ -1,0 +1,88 @@
+@media screen and (max-width: 1440px) {
+    .col-center {
+        width: 30vw;
+    }
+
+  .col-right {
+    width: 32vw;
+  }
+}
+
+@media screen and (max-width: 1280px), screen and (max-height: 800px) {
+  :root {
+    --font-size-time: 5.5rem;
+    --font-size-date: 1.5rem;
+    --font-size-greeting: 1.2rem;
+    --font-size-weather-city: 2.5rem;
+    --font-size-weather-temp: 2.5rem;
+    --font-size-weather-detail: 1rem;
+    --font-size-card-title: 0.9rem;
+    --font-size-general-btn: 0.9rem;
+    --font-size-todo-item: 0.9rem;
+  }
+
+  .col-right {
+    width: 35vw;
+    gap: 1vh;
+  }
+
+  .threed-btn {
+    min-width: 90px;
+    height: 40px;
+  }
+
+  .search-container {
+    padding: 8px 15px;
+    margin-top: 10px;
+  }
+}
+
+/* When the screen is very small (720p or less) */
+@media screen and (max-width: 1024px) {
+  .main-grid {
+    width: 98%;
+    gap: 15px;
+  }
+
+  .col-right {
+    width: 40vw;
+  }
+
+  /* Shrink the video thumbnails to fit the sidebar */
+  .videoOpt {
+    height: 60px;
+  }
+}
+
+/* Vertical scaling for very short windows (Aspect Ratio Maintenance) */
+@media screen and (max-height: 650px) {
+  :root {
+    --font-size-time: 4rem;
+    --font-size-weather-city: 2rem;
+  }
+
+  .widget-glass {
+    padding: 8px;
+  }
+
+  .card-title {
+    margin-bottom: 5px;
+  }
+
+  .todo-card {
+    max-height: 120px;
+  }
+}
+
+/* Ultra Wide Scales Up */
+@media screen and (min-width: 2000px) {
+  :root {
+    --font-size-time: 10rem;
+    --font-size-weather-city: 5rem;
+  }
+
+  .col-right {
+    width: 20vw;
+    max-width: 700px;
+  }
+}

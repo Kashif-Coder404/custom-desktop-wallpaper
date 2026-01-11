@@ -14,17 +14,34 @@
   --text-main: #ffffff;
   --glass-border: rgba(255, 255, 255, 0.15);
 
-  /* --- TYPOGRAPHY CONTROL (Edit sizes here) --- */
-  --font-size-greeting: 1.6rem;
-  --font-size-card-title: 1.2rem;
-  --font-size-weather-city: 4rem;
-  --font-size-weather-temp: 3.6rem;
-  --font-size-weather-detail: 1.9rem;
-  --font-size-dropdown-btn: 1.2rem;
-  --font-size-dropdown-link: 1.5rem;
-  --font-size-todo-item: 1.2rem;
-  --font-size-general-btn: 1.6rem;
-  --font-size-stopwatch: 2.8rem;
+  --font-size-general-btn: clamp(0.9rem, 1.5vw, 1.6rem);
+  --font-size-card-title: clamp(1rem, 1.2vw, 1.4rem);
+  --font-size-dropdown-btn: clamp(0.9rem, 1.2vw, 1.2rem);
+  --font-size-dropdown-link: clamp(0.9rem, 1.2vw, 1.5rem);
+
+  /* Greeting & Time */
+  --font-size-greeting: clamp(1.2rem, 2vw, 2rem);
+  --font-size-time: clamp(3rem, 10vw, 9rem);
+  --font-size-date: clamp(1.5rem, 4vw, 3rem);
+
+  /* Weather Widget */
+  --font-size-weather-city: clamp(2.5rem, 5vw, 4.5rem);
+  --font-size-weather-temp: clamp(2.5rem, 4vw, 4rem);
+  --font-size-weather-detail: clamp(1rem, 1.5vw, 1.9rem);
+  --font-size-weather-header: clamp(0.75rem, 1vw, 1rem);
+
+  /* Todo List */
+  --font-size-todo-item: clamp(0.9rem, 1.1vw, 1.3rem);
+  --font-size-todo-input: clamp(0.9rem, 1.2vw, 1.2rem);
+
+  /* Search & 3D Buttons */
+  --font-size-search-input: clamp(1rem, 1.5vw, 1.4rem);
+  --font-size-search-icon: clamp(1.2rem, 1.8vw, 1.8rem);
+  --font-size-3d-btn: clamp(0.8rem, 1.1vw, 1.1rem);
+  --font-size-3d-icon: clamp(1rem, 1.5vw, 1.3rem);
+
+  /* Stopwatch */
+  --font-size-stopwatch: clamp(2rem, 4vw, 3.5rem);
 }
 
 * {
@@ -53,15 +70,14 @@ body {
   position: absolute;
   inset: 0;
   background: var(--bg-overlay);
-  /* background: rgba(0, 128, 0, 0.16); */
   background-size: cover;
   background-position: center;
-
   z-index: -1;
   width: 100vw;
   height: 100vh;
   transition: background 0.5s;
 }
+
 #cursor-glow {
   text-align: center;
   display: flex;
@@ -69,13 +85,9 @@ body {
   align-items: center;
   font-size: 50px;
   color: var(--accent);
-}
-#cursor-glow {
   position: fixed;
   width: 40px;
   height: 40px;
-  /* background: radial-gradient(circle, var(--accent-glow), transparent 70%); */
-  /* background: var(--accent); */
   border: 5px dashed var(--accent);
   border-radius: 50%;
   translate: -50% -50%;
@@ -84,6 +96,7 @@ body {
   transition: transform 0.3s ease-in-out, scale 0.1s ease-in-out;
   animation: spinLoad 2s linear infinite;
 }
+
 @keyframes spinLoad {
   from {
     transform: rotate(0deg);
@@ -101,21 +114,33 @@ body {
   filter: blur(0px) brightness(90%);
   z-index: -2;
   width: 100vw;
-}
-.main-grid {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   height: 100vh;
-  width: 73%;
-  z-index: 1000;
 }
 
-.col-center {
+.main-grid {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100vh;
+  width: 95%;
+  max-width: 1800px;
+  margin: 0 auto;
+  z-index: 1000;
+  gap: 2vw;
+}
+
+/* .col-center {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 30px;
+} */
+.col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: flex-end; Aligns clock text to the right side of its column */
+  gap: 2vh;
 }
 
 .col-right {
@@ -152,7 +177,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: var(--font-size-card-title); /* VARIABLE APPLIED */
+  font-size: var(--font-size-card-title);
   color: var(--accent);
   font-weight: 700;
   margin-bottom: 12px;
@@ -169,14 +194,14 @@ body {
 
 #time-display {
   font-family: "Digital-7 Mono", sans-serif;
-  font-size: clamp(122px, 2vw, 130px); /* NO VARIABLE (Keep fixed) */
+  font-size: var(--font-size-time); /* Variable Applied */
   font-weight: 700;
   line-height: 1;
   letter-spacing: 2px;
 }
 
 #date-display {
-  font-size: clamp(40px, 2vw, 50px); /* NO VARIABLE (Keep fixed) */
+  font-size: var(--font-size-date); /* Variable Applied */
   color: var(--accent);
   letter-spacing: 6px;
   text-transform: uppercase;
@@ -184,7 +209,7 @@ body {
 
 #greeting {
   margin-top: 10px;
-  font-size: var(--font-size-greeting); /* VARIABLE APPLIED */
+  font-size: var(--font-size-greeting);
   font-weight: 600;
   opacity: 0.9;
 }
@@ -215,7 +240,7 @@ body {
   width: 100%;
   height: 100%;
   background: var(--accent-btn);
-  font-size: 16px;
+  font-size: var(--font-size-3d-btn); /* Variable Applied */
   font-weight: 600;
   color: rgb(36, 38, 34);
   display: flex;
@@ -261,7 +286,6 @@ body {
 .threed-btn .bottom::before {
   left: 20%;
 }
-
 .threed-btn .bottom::after {
   left: 80%;
 }
@@ -305,8 +329,8 @@ body {
 /* 2. Active State (Uses Theme Variable) */
 .threed-btn.active .top {
   transform: translateY(8px);
-  background: var(--accent) !important; /* THEME COLOR */
-  color: #000 !important; /* Black text for contrast */
+  background: var(--accent) !important;
+  color: #000 !important;
   border-color: var(--accent) !important;
   box-shadow: 0 0 15px var(--accent-glow);
 }
@@ -314,13 +338,13 @@ body {
 /* 3. Darker Bottom Layer for Active State */
 .threed-btn.active .bottom {
   background: var(--accent) !important;
-  filter: brightness(0.6); /* Auto-darken for depth */
+  filter: brightness(0.6);
   border-color: var(--accent) !important;
 }
 
 /* ICON SIZING */
 .threed-btn .material-icons {
-  font-size: 18px;
+  font-size: var(--font-size-3d-icon); /* Variable Applied */
   color: inherit;
 }
 
@@ -343,7 +367,7 @@ body {
 }
 
 .search-icon {
-  font-size: 1.5rem;
+  font-size: var(--font-size-search-icon); /* Variable Applied */
   color: white;
   margin-right: 10px;
 }
@@ -352,13 +376,12 @@ body {
   background: transparent;
   border: none;
   color: var(--accent);
-  font-size: 1.1rem;
+  font-size: var(--font-size-search-input); /* Variable Applied */
   width: 100%;
   outline: none;
 }
 #google-search::placeholder {
   font-weight: bold;
-  /* text-shadow: 0 0 1px var(--accent-btn); */
   color: white;
 }
 
@@ -370,13 +393,13 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.9rem;
+  font-size: var(--font-size-weather-header); /* Variable Applied */
   color: #888;
   letter-spacing: 2px;
 }
 
 .w-city {
-  font-size: var(--font-size-weather-city); /* VARIABLE APPLIED */
+  font-size: var(--font-size-weather-city);
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -388,14 +411,14 @@ body {
 }
 
 .w-temp {
-  font-size: var(--font-size-weather-temp); /* VARIABLE APPLIED */
+  font-size: var(--font-size-weather-temp);
   font-weight: 700;
   color: var(--accent);
 }
 
 .w-details {
   text-align: right;
-  font-size: var(--font-size-weather-detail); /* VARIABLE APPLIED */
+  font-size: var(--font-size-weather-detail);
   opacity: 0.8;
 }
 
@@ -405,7 +428,7 @@ body {
   justify-content: start;
   flex-direction: column;
   max-height: 200px;
-  overflow: auto;
+
   margin: 0;
 }
 
@@ -426,7 +449,7 @@ body {
   color: white;
   border-radius: 4px;
   outline: none;
-  font-size: var(--font-size-todo-item);
+  font-size: var(--font-size-todo-input); /* Variable Applied */
 }
 
 button {
@@ -437,7 +460,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
-  font-size: var(--font-size-general-btn); /* VARIABLE APPLIED */
+  font-size: var(--font-size-general-btn);
   transition: 0.2s;
 }
 
@@ -451,13 +474,14 @@ button:hover {
   overflow: auto;
   padding-right: 5px;
 }
-/* TODO LIST */
+
+/* TODO LIST SCROLLBAR */
 #todo-list::-webkit-scrollbar {
   width: 6px;
 }
 
 #todo-list::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05); /* glassy */
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
 }
 
@@ -509,7 +533,7 @@ button:hover {
   border-radius: 4px;
   display: flex;
   justify-content: space-between;
-  font-size: var(--font-size-todo-item); /* VARIABLE APPLIED */
+  font-size: var(--font-size-todo-item);
   border-left: 2px solid #555;
 }
 
@@ -579,7 +603,7 @@ button:hover {
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  font-size: var(--font-size-dropdown-btn); /* VARIABLE APPLIED */
+  font-size: var(--font-size-dropdown-btn);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -629,7 +653,7 @@ button:hover {
   padding: 10px 20px;
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
-  font-size: var(--font-size-dropdown-link); /* VARIABLE APPLIED */
+  font-size: var(--font-size-dropdown-link);
   transition: all 0.2s;
   border-left: 2px solid transparent;
 }
@@ -649,7 +673,7 @@ button:hover {
 }
 
 #stopwatch-display {
-  font-size: var(--font-size-stopwatch); /* VARIABLE APPLIED */
+  font-size: var(--font-size-stopwatch);
   font-family: monospace;
   font-weight: bold;
 }
