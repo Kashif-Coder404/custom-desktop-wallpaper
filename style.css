@@ -724,11 +724,27 @@ button:hover {
 
 .videosCont {
   display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 14px;
+}
+.videoOptCont {
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 14px;
 }
-
+.videoTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-card-title);
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 .videoOpt {
   height: 90px;
   aspect-ratio: 16 / 9;
